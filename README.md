@@ -1,42 +1,50 @@
-# Hi! 👋<br>I'm Marten de Bruijn
+# React + TypeScript + Vite
 
-> I'm a front-end engineer who mostly writes in TypeScript and who loves to make new front-end components and systems or build other things with TypeScript.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- 🏢 Currently working for [@MICE Operations](https://www.miceoperations.com/) and [@Beer n Tea](https://www.beerntea.com/) as a Front-end developer
-- ❤️ I enjoy writing TypeScript, React, Vue, (S)CSS, NPM packages
-- ⚡️ I made my own [TypeScript types library](https://github.com/martendebruijn/types)
-- 🔧 [My dotfiles](https://github.com/martendebruijn/dotfiles)
-- 📸 If I'm not coding, I'm out taking [photos](https://instagram.com/martentriestotakephotos)
+Currently, two official plugins are available:
 
-<br>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-<picture>
-  <source
-    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=martendebruijn&layout=compact&theme=highcontrast"
-    media="(prefers-contrast: more)"
-  />
-  <source
-    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=martendebruijn&layout=compact&theme=solarized-dark"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=martendebruijn&layout=compact&theme=solarized-light"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=martendebruijn&layout=compact&theme=solarized-light" alt="Most used languages by Marten"/>
-</picture>
+## Expanding the ESLint configuration
 
-## Other media
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-<a href="https://www.linkedin.com/in/martendebruijn/" title="LinkedIn">
-  <img src="https://img.shields.io/badge/martendebruijn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&style=social" alt="LinkedIn profile Marten de Bruijn"/>
-</a>
-<a href="https://gitlab.com/martendebruijn/" title="GitLab">
-  <img src="https://img.shields.io/badge/martendebruijn-330F63?style=for-the-badge&logo=gitlab&logoColor=white&style=social" alt="Gitlab profile Marten de Bruijn"/>
-</a>
-<a href="https://codepen.io/martendebruijn" title="Codepen">
-  <img src="https://img.shields.io/badge/martendebruijn-000000?style=for-the-badge&logo=codepen&logoColor=white&style=social" alt="CodePen profile Marten de Bruijn"/>
-</a>
-<a href="https://instagram.com/martentriestotakephotos" title="@martentriestotakephotos">
-  <img src="https://img.shields.io/badge/@martentriestotakephotos-E4405F?style=for-the-badge&logo=instagram&logoColor=white&style=social" alt="Link to Marten tries to take photos on Instagram"/>
-</a>
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
+
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```

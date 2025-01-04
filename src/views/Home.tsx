@@ -69,6 +69,15 @@ export function Home() {
           githubUrl="https://github.com/martendebruijn/delete-merged"
         />
       </Section>
+      <Section title="Contact">
+        <p>
+          You can contact me via{" "}
+          <a
+            href="mailto:martendebruijn@outlook.com"
+            className="underline text-blue-500"
+          />
+        </p>
+      </Section>
       <Footer />
     </div>
   );

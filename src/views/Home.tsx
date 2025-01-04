@@ -5,7 +5,7 @@ import { SectionItem } from "../components/SectionItem";
 
 export function Home() {
   return (
-    <>
+    <div className="max-w-4xl mx-auto">
       <Header />
       <Section title="Projects">
         <SectionItem
@@ -28,6 +28,6 @@ export function Home() {
         />
       </Section>
       <Footer />
-    </>
+    </div>
   );
 }

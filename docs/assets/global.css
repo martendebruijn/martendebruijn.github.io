@@ -4,7 +4,7 @@ body {
   background-color: hsl(0, 0%, 100%);
 }
 
-div {
+section {
   display: grid;
   place-content: center;
   height: 100%;
@@ -19,5 +19,29 @@ canvas {
   width: 100dvw;
   height: 100dvb;
   background-color: transparent;
+  z-index: 10;
+}
+
+.toolbar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 20;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

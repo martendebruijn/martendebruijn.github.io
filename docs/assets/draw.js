@@ -1,10 +1,16 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const colorPicker = document.getElementById("colorPicker");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let drawing = false;
+let currentColor = "#000000";
+
+colorPicker.addEventListener("input", (e) => {
+  currentColor = e.target.value;
+});
 
 function startDrawing(e) {
   drawing = true;
@@ -15,7 +21,7 @@ function startDrawing(e) {
 function draw(e) {
   if (!drawing) return;
   ctx.lineTo(e.clientX, e.clientY);
-  ctx.strokeStyle = "black";
+  ctx.strokeStyle = currentColor;
   ctx.lineWidth = 2;
   ctx.stroke();
 }

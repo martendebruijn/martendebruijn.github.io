@@ -1,11 +1,23 @@
 body {
   font-family: monospace;
   height: 100dvh;
+  background-color: hsl(0, 0%, 100%);
 }
 
-main {
+div {
   display: grid;
   place-content: center;
   height: 100%;
+  position: relative;
   text-align: center;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvb;
+  background-color: transparent;
+  z-index: 20;
 }

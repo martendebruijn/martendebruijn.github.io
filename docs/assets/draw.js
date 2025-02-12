@@ -2,6 +2,12 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let drawing = false;
+let currentColor = '#000000';
+
+document.getElementById("colorPicker").addEventListener("input", (event) => {
+  currentColor = event.target.value;
+});
+
 
 // 🛠 Zorg dat het canvas altijd correct is geschaald
 function resizeCanvas() {
@@ -33,6 +39,7 @@ function startDrawing(event) {
   const { x, y } = getPosition(event);
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctx.strokeStyle = currentColor;
 }
 
 // 🖌 Teken terwijl je beweegt
@@ -41,6 +48,7 @@ function draw(event) {
   event.preventDefault();
   const { x, y } = getPosition(event);
   ctx.lineTo(x, y);
+  ctx.strokeStyle = currentColor;
   ctx.stroke();
 }
 
